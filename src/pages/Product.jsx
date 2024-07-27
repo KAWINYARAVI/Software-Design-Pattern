@@ -1,194 +1,163 @@
-import React, { useEffect, useState } from "react";
-import Skeleton from "react-loading-skeleton";
-import { Link, useParams } from "react-router-dom";
-import Marquee from "react-fast-marquee";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addCart } from "../redux/action";
+import Skeleton from "react-loading-skeleton";
+import "react-loading-skeleton/dist/skeleton.css";
+import { Link } from "react-router-dom";
 
-import { Footer, Navbar } from "../components";
+const Products = () => {
+  const [data, setData] = useState([
+    {
+      id: 1,
+      title: "Product 1",
+      category: "men's clothing",
+      image: "https://i.pinimg.com/originals/3a/8d/75/3a8d752cdc53eea9967bace1b00a2579.jpg",
+      price: 3999.99,
+      description: "This is a description for product 1",
+    },
+    {
+      id: 2,
+      title: "Product 2",
+      category: "women's clothing",
+      image: "https://i.pinimg.com/originals/46/0c/42/460c42af5b036016009002d95dccc23f.jpg",
+      price: 5979.99,
+      description: "This is a description for product 2",
+    },
+    {
+      id: 3,
+      title: "Product 3",
+      category: "jewelery",
+      image: "https://www.bridesofsydney.com.au/wp-content/uploads/2019/08/C512F.jpg",
+      price: 4199.99,
+      description: "This is a description for product 3",
+    },
+    {
+      id: 4,
+      title: "Product 4",
+      category: "electronics",
+      image: "https://dresseskhazana.com/wp-content/uploads/2017/06/stylish-open-shirt-dresses-for-girls-2017.jpg",
+      price: 2499.99,
+      description: "This is a description for product 4",
+    },
+    {
+      id: 5,
+      title: "Product 5",
+      category: "men's clothing",
+      image: "https://i.pinimg.com/originals/e2/c8/bd/e2c8bd63bfd937756b0c3d23feeb14fb.jpg",
+      price: 5289.99,
+      description: "This is a description for product 5",
+    },
+    {
+      id: 6,
+      title: "Product 6",
+      category: "women's clothing",
+      image: "https://i.pinimg.com/originals/22/39/33/22393354b13d1ea1f57dcbbf9bb5729b.jpg",
+      price: 2109.99,
+      description: "This is a description for product 6",
+    },
+  ]);
 
-const Product = () => {
-  const { id } = useParams();
-  const [product, setProduct] = useState([]);
-  const [similarProducts, setSimilarProducts] = useState([]);
+  const [filter, setFilter] = useState(data);
   const [loading, setLoading] = useState(false);
-  const [loading2, setLoading2] = useState(false);
-
   const dispatch = useDispatch();
 
   const addProduct = (product) => {
     dispatch(addCart(product));
   };
 
-  useEffect(() => {
-    const getProduct = async () => {
-      setLoading(true);
-      setLoading2(true);
-      const response = await fetch(`https://fakestoreapi.com/products/${id}`);
-      const data = await response.json();
-      setProduct(data);
-      setLoading(false);
-      const response2 = await fetch(
-        `https://fakestoreapi.com/products/category/${data.category}`
-      );
-      const data2 = await response2.json();
-      setSimilarProducts(data2);
-      setLoading2(false);
-    };
-    getProduct();
-  }, [id]);
+  const filterProduct = (cat) => {
+    const updatedList = data.filter((item) => item.category === cat);
+    setFilter(updatedList);
+  };
 
   const Loading = () => {
     return (
       <>
-        <div className="container my-5 py-2">
-          <div className="row">
-            <div className="col-md-6 py-3">
-              <Skeleton height={400} width={400} />
-            </div>
-            <div className="col-md-6 py-5">
-              <Skeleton height={30} width={250} />
-              <Skeleton height={90} />
-              <Skeleton height={40} width={70} />
-              <Skeleton height={50} width={110} />
-              <Skeleton height={120} />
-              <Skeleton height={40} width={110} inline={true} />
-              <Skeleton className="mx-3" height={40} width={110} />
-            </div>
-          </div>
+        <div className="col-12 py-5 text-center">
+          <Skeleton height={75} width={400} />
         </div>
+        {[...Array(6)].map((_, index) => (
+          <div className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4" key={index}>
+            <Skeleton height={400} />
+          </div>
+        ))}
       </>
     );
   };
 
-  const ShowProduct = () => {
+  const ShowProducts = () => {
     return (
       <>
-        <div className="container my-5 py-2">
-          <div className="row">
-            <div className="col-md-6 col-sm-12 py-3">
-              <img
-                className="img-fluid"
-                src={product.image}
-                alt={product.title}
-                width="400px"
-                height="400px"
-              />
-            </div>
-            <div className="col-md-6 col-md-6 py-5">
-              <h4 className="text-uppercase text-muted">{product.category}</h4>
-              <h1 className="display-5">{product.title}</h1>
-              <p className="lead">
-                {product.rating && product.rating.rate}{" "}
-                <i className="fa fa-star"></i>
-              </p>
-              <h3 className="display-6  my-4">${product.price}</h3>
-              <p className="lead">{product.description}</p>
-              <button
-                className="btn btn-outline-dark"
-                onClick={() => addProduct(product)}
-              >
-                Add to Cart
-              </button>
-              <Link to="/cart" className="btn btn-dark mx-3">
-                Go to Cart
-              </Link>
-            </div>
-          </div>
+        <div className="buttons text-center py-5">
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => setFilter(data)}>
+            All
+          </button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("men's clothing")}>
+            Mens
+          </button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("women's clothing")}>
+            Womens
+          </button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("jewelery")}>
+            Party
+          </button>
+          <button className="btn btn-outline-dark btn-sm m-2" onClick={() => filterProduct("electronics")}>
+            Bridals
+          </button>
         </div>
-      </>
-    );
-  };
 
-  const Loading2 = () => {
-    return (
-      <>
-        <div className="my-4 py-4">
-          <div className="d-flex">
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-            <div className="mx-4">
-              <Skeleton height={400} width={250} />
-            </div>
-          </div>
-        </div>
-      </>
-    );
-  };
-
-  const ShowSimilarProduct = () => {
-    return (
-      <>
-        <div className="py-4 my-4">
-          <div className="d-flex">
-            {similarProducts.map((item) => {
-              return (
-                <div key={item.id} className="card mx-4 text-center">
-                  <img
-                    className="card-img-top p-3"
-                    src={item.image}
-                    alt="Card"
-                    height={300}
-                    width={300}
-                  />
-                  <div className="card-body">
-                    <h5 className="card-title">
-                      {item.title.substring(0, 15)}...
-                    </h5>
-                  </div>
-                  {/* <ul className="list-group list-group-flush">
-                    <li className="list-group-item lead">${product.price}</li>
-                  </ul> */}
-                  <div className="card-body">
-                    <Link
-                      to={"/product/" + item.id}
-                      className="btn btn-dark m-1"
-                    >
-                      Buy Now
-                    </Link>
-                    <button
-                      className="btn btn-dark m-1"
-                      onClick={() => addProduct(item)}
-                    >
-                      Add to Cart
-                    </button>
-                  </div>
+        {filter.map((product) => {
+          return (
+            <div id={product.id} key={product.id} className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4">
+              <div className="card text-center h-100" key={product.id}>
+                <img
+                  className="card-img-top p-3"
+                  src={product.image}
+                  alt={product.title}
+                  height={600}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">
+                    {product.title.substring(0, 12)}...
+                  </h5>
+                  <p className="card-text">
+                    {product.description.substring(0, 90)}...
+                  </p>
                 </div>
-              );
-            })}
-          </div>
-        </div>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item lead">$ {product.price}/Day</li>
+                </ul>
+                <div className="card-body">
+                  <Link to={"/product/" + product.id} className="btn btn-dark m-1">
+                    Buy Now
+                  </Link>
+                  <button className="btn btn-dark m-1" onClick={() => addProduct(product)}>
+                    Add to Cart
+                  </button>
+                </div>
+              </div>
+            </div>
+          );
+        })}
       </>
     );
   };
+
   return (
     <>
-      <Navbar />
-      <div className="container">
-        <div className="row">{loading ? <Loading /> : <ShowProduct />}</div>
-        <div className="row my-5 py-5">
-          <div className="d-none d-md-block">
-          <h2 className="">You may also Like</h2>
-            <Marquee
-              pauseOnHover={true}
-              pauseOnClick={true}
-              speed={50}
-            >
-              {loading2 ? <Loading2 /> : <ShowSimilarProduct />}
-            </Marquee>
+      <div className="container my-3 py-3">
+        <div className="row">
+          <div className="col-12">
+            <h2 className="display-5 text-center">Latest Products</h2>
+            <hr />
           </div>
         </div>
+        <div className="row justify-content-center">
+          {loading ? <Loading /> : <ShowProducts />}
+        </div>
       </div>
-      <Footer />
     </>
   );
 };
 
-export default Product;
+export default Products;

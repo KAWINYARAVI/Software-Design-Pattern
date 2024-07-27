@@ -23,11 +23,11 @@ const AboutPage = () => {
           dignissimos blanditiis excepturi harum numquam vel nihil? Ipsum
         </p>
 
-        <h2 className="text-center py-4">Our Products</h2>
+        <h2 className="text-center py-4">Our Collections</h2>
         <div className="row">
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/298863/pexels-photo-298863.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://i.pinimg.com/736x/c9/90/13/c99013e3d27c7e8b373629c0af3fccb6.jpg" alt="" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Mens's Clothing</h5>
               </div>
@@ -35,7 +35,7 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/7679720/pexels-photo-7679720.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://blog.kreeva.com/wp-content/uploads/2020/11/long-min-1.jpg" alt="" height={160} />
               <div className="card-body">
                 <h5 className="card-title text-center">Women's Clothing</h5>
               </div>
@@ -43,17 +43,17 @@ const AboutPage = () => {
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/1927259/pexels-photo-1927259.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://2.bp.blogspot.com/-BsrbZku9-8s/UOf9eO3JCRI/AAAAAAAAIEg/ACBXJbPiYQs/s1600/Black-Cocktail-Dress-Designs.jpg" alt="" height={160} />
               <div className="card-body">
-                <h5 className="card-title text-center">Jewelery</h5>
+                <h5 className="card-title text-center">Party Wears</h5>
               </div>
             </div>
           </div>
           <div className="col-md-3 col-sm-6 mb-3 px-3">
             <div className="card h-100">
-              <img className="card-img-top img-fluid" src="https://images.pexels.com/photos/356056/pexels-photo-356056.jpeg?auto=compress&cs=tinysrgb&w=600" alt="" height={160} />
+              <img className="card-img-top img-fluid" src="https://www.stylesgap.com/wp-content/uploads/2016/04/Indian-Designer-Bridal-Dresses-Wedding-Trends-2016-2017-Collection-22.jpg" alt="" height={160} />
               <div className="card-body">
-                <h5 className="card-title text-center">Electronics</h5>
+                <h5 className="card-title text-center">Bridals</h5>
               </div>
             </div>
           </div>
