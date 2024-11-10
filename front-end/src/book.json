@@ -1,0 +1,15 @@
+{
+    "books": [
+      {
+        "id": 1,
+        "title": "Book Title 1",
+        "author": "Author Name",
+        "category": "fiction",
+        "coverImage": "image_url",
+        "pdf": "book1.pdf",
+        "price": 5.99,
+        "description": "Description of the book"
+      }
+      
+    ]
+  }
